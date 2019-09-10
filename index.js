@@ -71,6 +71,8 @@
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__findMax__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getSum__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__timeMul__ = __webpack_require__(3);
+
 
 
 
@@ -100,6 +102,17 @@ app.get("/api/max", function(request, response) {
         result: result,
     }));
 });
+
+app.get("/api/mul", function(request, response) {
+    const a = request.query.a + "";
+    const b = request.query.b + "";
+    Object(__WEBPACK_IMPORTED_MODULE_2__timeMul__["a" /* default */])(a, b, (result) => {
+        response.end(JSON.stringify({
+            result: result,
+        }));
+    });
+});
+
 
 
 /***/ }),
@@ -145,6 +158,34 @@ function getSum(a, b) {
     let summa = a + b;
     if(!summa) summa = 0;
     return summa;
+}
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = timeMulModule;
+
+
+function timeMulModule(a, b, callback) {
+    setTimeout(function() {
+        setTimeout(function() {
+            a = parseInt(a);
+            b = parseInt(b);
+            let value = a * b;
+            value = parseInt(value);
+            if(value < 0) {
+                value = value * (-1);
+            }
+            value = parseInt(value);
+            if(!value) {
+                value = 0;
+            }
+            callback(value);
+        }, 2000);
+    }, 2000);
 }
 
 

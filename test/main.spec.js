@@ -4,6 +4,7 @@ import assert from 'assert';
 
 import getSum from "./../scripts/getSum";
 import findMax from "./../scripts/findMax";
+import timeMul from "./../scripts/timeMul";
 
 describe("Тестирование функции получения максимального числа", () => {
     it("Передача разных чисел в качестве параметров", () => {
@@ -86,3 +87,27 @@ describe("Тестирование функции получения суммы 
         assert.deepStrictEqual(getSum("xyz", "abcd"), 0);
     });
 });
+
+describe("Тестирование асинхронной функции", () => {
+    it("Передача положительных значений", (done) => {
+        timeMul(12, 5, (ans) => {
+            assert.deepStrictEqual(ans, 60);
+            done();
+        });
+    });
+
+    it("Передача одного отрицательного значения", (done) => {
+        timeMul(-7, 2, (ans) => {
+            assert.deepStrictEqual(ans, 14);
+            done();
+        });
+    });
+
+    it("Передача некорректного значения", (done) => {
+        timeMul("abcde", 5, (ans) => {
+            assert.deepStrictEqual(ans, 0);
+            done();
+        });
+    });
+});
+
